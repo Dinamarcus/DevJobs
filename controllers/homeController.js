@@ -21,18 +21,34 @@ const mostrarTrabajos = async (req, res, next) => {
   });
 };
 
-const vacantesFiltradas = async (req, res) => {
-  const vacantes = await Vacante.find({
-    titulo: { $regex: ".*" + req.body.term + ".*", $options: "i" },
-  }).lean();
+const vacantesFiltradas = async (req, res, next) => {
+  const page = parseInt(req.query.page) || 1;
+  const limit = 5;
+  const skip = (page - 1) * limit;
+  const term = req.query.term || "";
+
+  // Consulta para contar el total de registros que coinciden con el término de búsqueda
+  const totalVacantes = await Vacante.countDocuments({
+    titulo: { $regex: ".*" + term + ".*", $options: "i" },
+  });
+
+  // Consulta para obtener los registros paginados
+  const vacantes = term === "" ?
+    await Vacante.find().skip(skip).limit(limit).lean() :
+    await Vacante.find({
+      titulo: { $regex: ".*" + term + ".*", $options: "i" },
+    }).skip(skip).limit(limit).lean();
+
+  const nroPaginas = Math.ceil(totalVacantes / limit);
+
+  if (!vacantes) return next();
 
   res.render("vacantes-filtradas", {
     nombrePagina: "Filtrado de Vacantes",
     vacantes,
-    barra: true,
-    termino: req.body.term,
-    usuario: req.user ? JSON.parse(JSON.stringify(req.user || "{}")) : null,
+    nroPaginas,
+    paginaActual: page,
+    termino: term,
   });
 };
-
 export { mostrarTrabajos, vacantesFiltradas };

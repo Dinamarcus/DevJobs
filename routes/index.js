@@ -131,6 +131,7 @@ Router.post("/reestablecer-password/:token", guardarPassword);
 
 // Filtrar vacante
 Router.post("/filter-search", vacantesFiltradas);
+Router.get("/filter-search", vacantesFiltradas);
 
 // Area privada
 Router.get("/administracion", verificarUsuario, calcularPaginas, mostrarPanel);
