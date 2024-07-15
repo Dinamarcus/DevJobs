@@ -9,7 +9,7 @@
     "css": "postcss public/css/tailwind.css -o public/css/app.css --watch",
     "js": "webpack --watch",
     "dev": "concurrently \"npm run css\" \"npm run js\"",
-    "prod": "concurrently \npm run dev\" \"npm run server\"",
+    "prod": "concurrently \"npm run dev\" \"npm run server\"",
     "db:importar": "node ./seed/seeder.js -i",
     "db:eliminar": "node ./seed/seeder.js -e"
   },
