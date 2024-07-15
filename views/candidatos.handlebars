@@ -1,0 +1,36 @@
+<main class="lista-candidatos">
+  <h2>Lista de Candidatos</h2>
+
+  {{#if candidatos.length}}
+    {{#each candidatos}}
+      <div class="candidato">
+        <div class="caja">
+          <p class="etiqueta">Nombre:</p>
+          <p class="nombre">{{nombre}}</p>
+        </div>
+        <div class="caja">
+          <p class="etiqueta">Email:</p>
+          <p class="nombre">{{email}}</p>
+        </div>
+        <div class="caja">
+          <a
+            href="/uploads/cv/{{cv}}"
+            class="btn btn-verde py-5 px-4 lg:px-16"
+          >Ver CV</a>
+        </div>
+      </div>
+    {{/each}}
+
+    <div class="flex justify-center mt-4">
+        <nav class="flex justify-center items-center gap-4 bg-gray-600 px-7 py-2 rounded-full">
+          {{#paginacionHelper nroPaginas}}
+          <div class="flex items-center justify-center hover:bg-slate-500 cursor-pointer px-3 py- rounded-full transition-all duration-300 ease-in-out">
+            <a href="/candidatos/{{../vacanteId}}/?page={{this}}" class="text-white flex-1 text-2xl nroPagina">{{this}}</a>
+          </div>
+          {{/paginacionHelper}}
+        </nav>
+    </div>
+  {{else}}
+
+  {{/if}}
+</main>

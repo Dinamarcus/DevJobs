@@ -1,0 +1,63 @@
+<div class="main contenedor">
+  <form
+    method="POST"
+    class="default-form"
+    enctype="multipart/form-data"
+    action="/editar-perfil"
+  >
+    <input type="hidden" name="csrfToken" value={{csrfToken}} />
+    <div class="campo">
+      <label for="nombre">Nombre</label>
+      <input
+        type="text"
+        name="nombre"
+        placeholder="Tu Nombre"
+        value={{usuario.nombre}}
+      />
+    </div>
+    <div class="campo">
+      <label for="email">E-mail</label>
+      <input
+        type="text"
+        name="email"
+        placeholder="Tu Email"
+        value={{usuario.email}}
+      />
+    </div>
+    <div class="campo">
+      <label for="password">Password Actual</label>
+      <input type="password" name="password" placeholder="Tu password actual" />
+    </div>
+    <div class="campo">
+      <label for="confirmar">Password Nuevo</label>
+      <input
+        type="password"
+        name="nuevoPassword"
+        placeholder="Tu nuevo password"
+      />
+    </div>
+
+    <div class="campo">
+      <label for="imagen">Imagen</label>
+      <input
+        type="file"
+        name="imagen"
+        id="imagen"
+        placeholder="Tu imagen de perfil"
+      />
+      {{#if usuario.imagen}}
+        <div class="flex justify-center items-center mt-8 md:mt-0">
+          <img
+            src="uploads/perfiles/{{usuario.imagen}}"
+            alt="Imagen Usuario"
+            class="admin-perfil transition-all duration-300 ease-in-out"
+          />
+        </div>  
+      {{/if}}
+    </div>
+
+    <div class="relative pb-16 h-20">
+      <input type="submit" value="Guardar Cambios" class="btn btn-azul" />
+    </div>
+  </form>
+</div>

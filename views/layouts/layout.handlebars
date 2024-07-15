@@ -1,0 +1,128 @@
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <script
+      src="https://kit.fontawesome.com/8fe8329aac.js"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://unpkg.com/trix@2.0.8/dist/trix.css"
+    />
+    <link rel="stylesheet" href="/css/app.css" />
+    <script
+      type="text/javascript"
+      src="https://unpkg.com/trix@2.0.8/dist/trix.umd.min.js"
+    ></script>
+    <script src="/js/hamburMenu.js" defer></script>
+    <script src="/js/app.js" defer></script>
+    <title>devJobs | {{nombrePagina}}</title>
+  </head>
+
+  <body>
+    <div class="m-4 text-center">
+      <div
+        class="grid md:flex transition-all duration-300 ease-in-out items-center space-y-9 md:space-y-0 md:justify-between"
+      >
+        <h1>
+          <a href="/">devJobs</a>
+        </h1>
+
+        {{#if (not autenticado)}}
+          <div
+            class="grid md:flex items-center space-y-6 md:space-y-0 md:justify-between flex-custom"
+          >
+            {{#if (not barra)}}
+              <div>
+                <a href="/">
+                  <i
+                    class="fa-solid fa-house fa-2xl hover:cursor-pointer hover:scale-125 transition-all duration-300 ease-in-out"
+                    style="color: #616065;"
+                  ></i>
+                </a>
+              </div>
+            {{/if}}
+
+            {{#if barra}}
+              <div class="buscador">
+                <form method="POST" action="/filter-search">
+                  <input
+                    type="text"
+                    name="term"
+                    placeholder="Buscar Vacante"
+                    class="buscar"
+                  />
+                  <input type="submit" value="Buscar" />
+                </form>
+              </div>
+            {{/if}}
+          </div>
+        {{/if}}
+
+        {{#if autenticado}}
+          <div class="grid md:flex text-gray-500 items-center justify-center">
+            <p class="md:px-3">Hola! {{usuario.nombre}}</p>
+
+          <div class="mt-5 mb-5">
+            <div class="md:hidden block">
+              <div class="flex items-center justify-center md:hidden">
+                <label class="labelMenu" for="check">
+                  <input type="checkbox" id="check" />
+                  <span class="spanMenu"></span>
+                  <span class="spanMenu"></span>
+                  <span class="spanMenu"></span>
+                </label>
+              </div>
+            </div>
+
+            <nav class="menu-nav hidden md:flex md:flex-row">
+              <div class="flex flex-col md:flex-row">
+                <a class="transition-all duration-1000 ease-in-out -translate-y-20 md:-translate-y-0 opacity-0 md:opacity-100 py-3 md:py-0 px-2" href="/">Inicio</a>
+                <a class="transition-all duration-700 ease-in-out -translate-y-20 md:-translate-y-0 opacity-0 md:opacity-100 py-3 md:py-0 md:px-2" href="/administracion">Administracion</a>
+                <a class="transition-all duration-700 ease-in-out -translate-y-20 md:-translate-y-0 opacity-0 md:opacity-100 py-3 md:py-0 md:px-2" href="/cerrar-sesion">Cerrar Sesion</a>
+              </div> 
+            </nav>
+          </div>
+
+            {{#if usuario.imagen}}
+              <img
+                src="/uploads/perfiles/{{usuario.imagen}}"
+                alt="Imagen Usuario"
+                class="rounded-full h-32 w-32 mr-auto ml-auto mb-0 mt-0"
+              />
+            {{/if}}
+          </div>
+        {{/if}}
+      </div>
+
+      <header class="site-header separador text-center">
+        <h2>{{nombrePagina}}</h2>
+
+        {{#if tagline}}
+          <p class="tagline">{{tagline}}</p>
+        {{/if}}
+
+        {{#if boton}}
+          <a href="/vacantes/nueva" class="btn btn-azul">Publicar Nueva Vacante</a>
+        {{/if}}
+      </header>
+
+      <div class="contenido-principal">
+        {{#if mensajes}}
+          <div class="alertas">
+            {{#mostrarAlertas mensajes}}{{/mostrarAlertas}}
+          </div>
+        {{/if}}
+        {{{body}}}
+      </div>
+    </div>
+  </body>
+</html>

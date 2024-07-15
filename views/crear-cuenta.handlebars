@@ -1,0 +1,36 @@
+<main class="contenedor">
+  <form action="/crear-cuenta" method="POST" class="default-form">
+    <div class="campo">
+      <label for="nombre">Nombre</label>
+      <input type="text" name="nombre" placeholder="Ej: Juan" />
+    </div>
+    <div class="campo">
+      <label for="descripcion">Sobre Ti</label>
+      <textarea
+        name="descripcion"
+        cols="70"
+        rows="10"
+        placeholder="Cuentanos un poco sobre ti!"
+        class="rounded-2xl place-content-center px-60"
+      ></textarea>
+    </div>
+    <div class="campo">
+      <label for="email">E-Mail</label>
+      <input type="email" name="email" placeholder="Tu E-mail" />
+    </div>
+    <div class="campo">
+      <label for="password">Password</label>
+      <input type="password" name="password" placeholder="Tu Password" />
+    </div>
+    <div class="campo">
+      <label for="confirmar">Repetir Password</label>
+      <input type="password" name="confirmar" placeholder="Repetir Password" />
+    </div>
+    <div class="campo acciones">
+      <a href="/iniciar-sesion">Volver a Iniciar Sesion</a>
+    </div>
+    <div class="campo h-20">
+      <input type="submit" value="Crear Cuenta" class="btn btn-azul" />
+    </div>
+  </form>
+</main>

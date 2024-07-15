@@ -1,0 +1,30 @@
+<main>
+  {{#if vacantes.length}}
+    <h2 class="mt-5 text-center">Estos son los resultados de: "{{termino}}"</h2>
+
+    {{#each vacantes}}
+      <div class="vacante gap-12">
+        <div class="caja">
+          <h3 class="text-left">Titulo</h3>
+          <p class="puesto">{{titulo}}</p>
+        </div>
+
+        <div class="caja">
+          <h3 class="text-left">Ubicacion</h3>
+          <p class="nombre">{{ubicacion}}</p>
+        </div>
+
+        <div class="caja">
+          <h3 class="text-left">Contrato</h3>
+          <p class="nombre contrato">{{contrato}}</p>
+        </div>
+
+        <div class="caja caja centrar-vertial">
+          <a href="/vacantes/{{url}}" class="btn btn-verde">Mas Info</a>
+        </div>
+      </div>
+    {{/each}}
+  {{else}}
+    <h2>No se encontraron resultados para: "{{termino}}" </h2>
+  {{/if}}
+</main>

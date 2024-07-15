@@ -1,0 +1,49 @@
+{
+  "name": "devjobs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "server": "nodemon ./app.js",
+    "css": "postcss public/css/tailwind.css -o public/css/app.css --watch",
+    "js": "webpack --watch",
+    "dev": "concurrently \"npm run css\" \"npm run js\"",
+    "db:importar": "node ./seed/seeder.js -i",
+    "db:eliminar": "node ./seed/seeder.js -e"
+  },
+  "author": "facu",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.6.8",
+    "bcrypt": "^5.1.1",
+    "concurrently": "^8.2.2",
+    "connect-flash": "^0.1.1",
+    "connect-mongo": "^5.1.0",
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^16.4.5",
+    "express": "^4.18.3",
+    "express-handlebars": "^7.1.2",
+    "express-session": "^1.18.0",
+    "express-validator": "^7.0.1",
+    "mongoose": "^8.2.2",
+    "multer": "^1.4.5-lts.1",
+    "nodemailer": "^6.9.13",
+    "nodemailer-express-handlebars": "^6.1.2",
+    "passport": "^0.7.0",
+    "passport-local": "^1.0.0",
+    "shortid": "^2.2.16",
+    "slug": "^9.0.0",
+    "sweetalert2": "^11.10.7",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.18",
+    "nodemon": "^3.1.0",
+    "postcss": "^8.4.36",
+    "postcss-cli": "^11.0.0",
+    "tailwindcss": "^3.4.1",
+    "webpack": "^5.90.3",
+    "webpack-cli": "^5.1.4"
+  }
+}

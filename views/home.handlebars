@@ -1,0 +1,38 @@
+<main class="lista-vacantes">
+  <h2>Lista de Vacantes</h2>
+  {{#if vacantes.length}}
+    {{#each vacantes}}
+      <div class="vacante gap-12">
+        <div class="caja">
+          <h3 class="text-left">Titulo</h3>
+          <p class="puesto">{{titulo}}</p>
+        </div>
+
+        <div class="caja">
+          <h3 class="text-left">Ubicacion</h3>
+          <p class="nombre">{{ubicacion}}</p>
+        </div>
+
+        <div class="caja">
+          <h3 class="text-left">Contrato</h3>
+          <p class="nombre contrato">{{contrato}}</p>
+        </div>
+
+        <div class="caja caja centrar-vertial">
+          <a href="/vacantes/{{url}}" class="btn btn-verde">Mas Info</a>
+        </div>
+      </div>
+    {{/each}}
+    <div class="flex justify-center mt-4">
+      <nav class="flex justify-center items-center gap-4 bg-gray-600 px-7 py-2 rounded-full">
+        {{#paginacionHelper nroPaginas}}
+        <div class="flex items-center justify-center hover:bg-slate-500 cursor-pointer px-3 py- rounded-full transition-all duration-300 ease-in-out">
+          <a href="/?page={{this}}" class="text-white flex-1 text-2xl nroPagina">{{this}}</a>
+        </div>
+        {{/paginacionHelper}}
+      </nav>
+    </div>
+  {{else}}
+    <p class="mensaje centrar-texto">No hay vacantes disponibles</p>
+  {{/if}}
+</main>

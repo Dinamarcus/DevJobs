@@ -1,0 +1,61 @@
+<main class="lista-vacantes">
+  <h2 class="text-center md:text-left">Navegacion</h2>
+  <div
+    class="separador grid md:flex gap-5 justify-center md:justify-start items-center"
+  >
+    <a class="btn py-5 px-4 btn-azul" href="/editar-perfil">Editar Perfil</a>
+    <a class="btn py-5 px-4 btn-verde" href="/vacantes/nueva">Nueva Vacante</a>
+  </div>
+
+  <h2>Tus Vacantes</h2>
+  <div class="panel-administracion">
+    {{#if vacantes.length}}
+      {{#each vacantes}}
+        <div class="vacante">
+          <div class="caja">
+            <h3 class="text-center md:text-start">{{empresa}}</h3>
+            <p class="text-center mb-2 md:mb-0">{{titulo}}</p>
+            <p class="md:text-start text-center">
+              {{candidatos.length}}
+              Candidato(s)
+            </p>
+          </div>
+
+          <div class="grid gap-5 md:flex md:gap-5">
+            <div class="centrar-vertical">
+              <a
+                href="/candidatos/{{_id}}"
+                class="btn btn-amarillo py-5 px-4 lg:px-16"
+              >Candidatos</a>
+            </div>
+            <div class="centrar-vertical">
+              <a
+                href="/vacantes/editar/{{url}}"
+                class="btn btn-verde py-5 px-4 lg:px-16"
+              >Editar</a>
+            </div>
+            <div class="centrar-vertical">
+              <a
+                href="#"
+                data-eliminar={{_id}}
+                class="btn btn-rojo py-5 px-4 lg:px-16"
+              >Eliminar</a>
+            </div>
+          </div>
+        </div>
+      {{/each}}
+
+      <div class="flex justify-center mt-4">
+        <nav class="flex justify-center items-center gap-4 bg-gray-600 px-7 py-2 rounded-full">
+          {{#paginacionHelper nroPaginas}}
+          <div class="flex items-center justify-center hover:bg-slate-500 cursor-pointer px-3 py- rounded-full transition-all duration-300 ease-in-out">
+            <a href="/administracion/?page={{this}}" class="text-white flex-1 text-2xl nroPagina">{{this}}</a>
+          </div>
+          {{/paginacionHelper}}
+        </nav>
+      </div>
+    {{else}}
+      <p>No hay vacantes, crea una.</p>
+    {{/if}}
+  </div>
+</main>
