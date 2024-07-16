@@ -2,7 +2,8 @@ import Express from "express";
 import { body } from "express-validator";
 import {
   mostrarTrabajos,
-  vacantesFiltradas,
+  buscarVacantes,
+  renderVacantesFiltradas,
 } from "../controllers/homeController.js";
 import {
   formularioNuevaVacante,
@@ -130,8 +131,11 @@ Router.get("/reestablecer-password/:token", reestablecerPassword);
 Router.post("/reestablecer-password/:token", guardarPassword);
 
 // Filtrar vacante
-Router.post("/filter-search", vacantesFiltradas);
-Router.get("/filter-search", vacantesFiltradas);
+// Manejar búsqueda con método GET (opcional, dependiendo de tu flujo de trabajo)
+Router.get("/filter-search", renderVacantesFiltradas);
+
+// Manejar el envío del formulario de búsqueda con método POST
+Router.post("/filter-search", buscarVacantes);
 
 // Area privada
 Router.get("/administracion", verificarUsuario, calcularPaginas, mostrarPanel);

@@ -21,34 +21,40 @@ const mostrarTrabajos = async (req, res, next) => {
   });
 };
 
-const vacantesFiltradas = async (req, res, next) => {
-  const page = parseInt(req.query.page) || 1;
+const buscarVacantes = async (req, res, next) => {
+  const { termino } = req.body; // Asegúrate de cambiar esto según tu implementación
+  res.redirect(`/filter-search/?termino=${termino}`);
+};
+
+const renderVacantesFiltradas = async (req, res, next) => {
+  const { termino } = req.query;
+  const page = req.query.page || 1;
   const limit = 5;
   const skip = (page - 1) * limit;
-  const term = req.query.term || "";
 
-  // Consulta para contar el total de registros que coinciden con el término de búsqueda
-  const totalVacantes = await Vacante.countDocuments({
-    titulo: { $regex: ".*" + term + ".*", $options: "i" },
-  });
+  // Crear una expresión regular con el término de búsqueda
+  // 'i' para ignorar mayúsculas/minúsculas
+  const regex = new RegExp(termino, 'i');
 
-  // Consulta para obtener los registros paginados
-  const vacantes = term === "" ?
-    await Vacante.find().skip(skip).limit(limit).lean() :
-    await Vacante.find({
-      titulo: { $regex: ".*" + term + ".*", $options: "i" },
-    }).skip(skip).limit(limit).lean();
+  // Buscar vacantes que coincidan con el término en el campo deseado
+  const vacantes = await Vacante.find({ titulo: regex })
+    .skip(skip)
+    .limit(limit)
+    .lean();
 
+  const totalVacantes = await Vacante.countDocuments({ titulo: regex });
   const nroPaginas = Math.ceil(totalVacantes / limit);
 
-  if (!vacantes) return next();
-
   res.render("vacantes-filtradas", {
-    nombrePagina: "Filtrado de Vacantes",
+    tagline: `Resultados para la búsqueda: ${termino}`,
+    barra: true,
+    boton: false,
+    vacantes,
+    usuario: req.user ? JSON.parse(JSON.stringify(req.user || "{}")) : null,
     vacantes,
     nroPaginas,
-    paginaActual: page,
-    termino: term,
+    termino
   });
 };
-export { mostrarTrabajos, vacantesFiltradas };
+
+export { mostrarTrabajos, renderVacantesFiltradas, buscarVacantes };
