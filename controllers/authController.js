@@ -2,7 +2,7 @@ import passport from "passport";
 import crypto from "crypto";
 import Vacante from "../models/Vacante.js";
 import Usuario from "../models/Usuario.js";
-import enviarEmail from "../handlers/email.js";
+import enviarEmail from "../handlers/emailProd.js";
 
 const autenticarUsuario = passport.authenticate("local", {
   successRedirect: "/administracion",
@@ -83,15 +83,39 @@ const enviarToken = async (req, res) => {
   await usuario.save();
   const resetUrl = `http://${req.headers.host}/reestablecer-password/${usuario.token}`;
 
-  console.log(resetUrl);
+  const options = {
+    asunto: "Password Reset",
+    html: `
+      <html>
+        <body style="font-family: Arial, sans-serif; margin: 0; padding: 20px; background-color: #f4f4f4;">
+            <div style="background-color: #fff; padding: 20px; margin: auto; max-width: 600px; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+                <div style="background-color: #4f46e5; color: #ffffff; padding: 10px; text-align: center; border-radius: 8px 8px 0 0;">
+                    <h2>Reestableceer Contraseña</h2>
+                </div>
+                <div style="margin-top: 20px;">
+                    <p>Hola, ${usuario.nombre}</p>
+                    <p>Hemos recibido una solicitud para reestablecer tu contraseña. Si no has realizado esta solicitud, por favor ignora este correo. De lo contrario, haz clic en el enlace de abajo para establecer una nueva contraseña:</p>
+                    <a href=${resetUrl} target="_blank" style="color: #007bff;">Reestablecer Contraseña</a>
+                </div>
+                <div style="background-color: #4f46e5; color: #ffffff; text-align: center; padding: 10px; border-radius: 0 0 8px 8px; margin-top: 20px;">
+                    <p>Gracias por unirte a nosotros,</p>
+                    <p>El Equipo de Nuestra Comunidad</p>
+                </div>
+            </div>
+        </body>
+      </html>
+    `,
+    remitente: {
+      name: "noReply",
+      email: "noReply@devJobs.com",
+    },
+    destinatario: {
+      name: usuario.nombre,
+      email: usuario.email,
+    }
+  }
 
-  // TODO : Enviar noti por email
-  await enviarEmail({
-    usuario,
-    subject: "Password Reset",
-    url: resetUrl,
-    archivo: "reset",
-  });
+  await enviarEmail(options);
 
   req.flash("correcto", "Revisa tu email para las indicaciones");
   res.redirect("/iniciar-sesion");

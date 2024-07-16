@@ -16,6 +16,7 @@
   "author": "facu",
   "license": "ISC",
   "dependencies": {
+    "@getbrevo/brevo": "^2.2.0",
     "axios": "^1.6.8",
     "bcrypt": "^5.1.1",
     "concurrently": "^8.2.2",
@@ -31,13 +32,14 @@
     "multer": "^1.4.5-lts.1",
     "nodemailer": "^6.9.13",
     "nodemailer-express-handlebars": "^6.1.2",
+    "nodemon": "^3.1.0",
     "passport": "^0.7.0",
     "passport-local": "^1.0.0",
     "shortid": "^2.2.16",
+    "sib-api-v3-sdk": "^8.5.0",
     "slug": "^9.0.0",
     "sweetalert2": "^11.10.7",
-    "uuid": "^9.0.1",
-    "nodemon": "^3.1.0"
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.18",

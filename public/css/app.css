@@ -498,6 +498,14 @@ video {
 .m-4 {
   margin: 1rem;
 }
+.mx-2 {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+.mx-5 {
+  margin-left: 1.25rem;
+  margin-right: 1.25rem;
+}
 .mb-0 {
   margin-bottom: 0px;
 }
@@ -564,6 +572,12 @@ video {
 }
 .place-content-center {
   place-content: center;
+}
+.place-content-stretch {
+  place-content: stretch;
+}
+.place-items-center {
+  place-items: center;
 }
 .items-center {
   align-items: center;
@@ -641,6 +655,14 @@ video {
   padding-top: 1.25rem;
   padding-bottom: 1.25rem;
 }
+.px-40 {
+  padding-left: 10rem;
+  padding-right: 10rem;
+}
+.py-40 {
+  padding-top: 10rem;
+  padding-bottom: 10rem;
+}
 .pb-16 {
   padding-bottom: 4rem;
 }
@@ -654,6 +676,9 @@ video {
   font-size: 1.5rem;
   line-height: 2rem;
 }
+.italic {
+  font-style: italic;
+}
 .text-gray-500 {
   --tw-text-opacity: 1;
   color: rgb(107 114 128 / var(--tw-text-opacity));
@@ -661,18 +686,6 @@ video {
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-.text-gray-300 {
-  --tw-text-opacity: 1;
-  color: rgb(209 213 219 / var(--tw-text-opacity));
-}
-.text-gray-400 {
-  --tw-text-opacity: 1;
-  color: rgb(156 163 175 / var(--tw-text-opacity));
-}
-.text-gray-600 {
-  --tw-text-opacity: 1;
-  color: rgb(75 85 99 / var(--tw-text-opacity));
 }
 .opacity-0 {
   opacity: 0;
@@ -1323,11 +1336,6 @@ input[type="checkbox"]:checked ~ .spanMenu:nth-of-type(3) {
 .hover\:bg-slate-500:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(100 116 139 / var(--tw-bg-opacity));
-}
-
-.hover\:text-gray-500:hover {
-  --tw-text-opacity: 1;
-  color: rgb(107 114 128 / var(--tw-text-opacity));
 }
 
 .hover\:text-gray-400:hover {
